@@ -1,7 +1,10 @@
 package Models;
 
+import lombok.Data;
+
+@Data
 public class ExchangeRateInfo {
-    private long rate;
-    private long fiveDayAverage;
-    private Trend exchangeTrend;
+    private final double currentRate;
+    private final double fiveDayAverage;
+    private final Trend exchangeTrend;
 }
