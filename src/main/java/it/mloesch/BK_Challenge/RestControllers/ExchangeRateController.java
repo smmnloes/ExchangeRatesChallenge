@@ -1,7 +1,9 @@
 package it.mloesch.BK_Challenge.RestControllers;
 
-import Models.ExchangeRateInfo;
-import it.mloesch.BK_Challenge.Services.ExchangeRateAPIService;
+import it.mloesch.BK_Challenge.Exceptions.ExchangeRatesAPIException;
+import it.mloesch.BK_Challenge.Exceptions.InvalidDateException;
+import it.mloesch.BK_Challenge.ExchangeRateAPIService;
+import it.mloesch.BK_Challenge.Models.ExchangeRateInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ import static it.mloesch.BK_Challenge.Definitions.URLs.EXCHANGE_INFO_URL;
 
 @RestController()
 public class ExchangeRateController {
+    private static final LocalDate MIN_DATE = LocalDate.parse("2000-01-01");
+    private static final LocalDate MAX_DATE = LocalDate.now().minusDays(1);
     private ExchangeRateAPIService exchangeRateAPIService;
 
 
@@ -27,19 +31,17 @@ public class ExchangeRateController {
 
     @GetMapping(EXCHANGE_INFO_URL)
     ResponseEntity<ExchangeRateInfo> getExchangeInfo(@PathVariable String date, @PathVariable String baseCurrency,
-                                           @PathVariable String targetCurrency) {
+                                                     @PathVariable String targetCurrency)
+            throws ExchangeRatesAPIException,
+            DateTimeParseException,
+            InvalidDateException {
+
 
         LocalDate parsedDate;
-        try {
-            parsedDate = LocalDate.parse(date);
-        } catch (DateTimeParseException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        parsedDate = LocalDate.parse(date);
 
-        LocalDate minimumDate = LocalDate.parse("2000-01-01");
-        LocalDate maximumDate = LocalDate.now().minusDays(1);
-        if (parsedDate.isBefore(minimumDate) || parsedDate.isAfter(maximumDate)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (parsedDate.isBefore(MIN_DATE) || parsedDate.isAfter(MAX_DATE)) {
+            throw new InvalidDateException("Invalid date! Only dates between " + MIN_DATE + " and " + MAX_DATE + " are allowed.");
         }
 
         ExchangeRateInfo exchangeRateInfo = this.exchangeRateAPIService.getExchangeRateInfo(parsedDate, baseCurrency, targetCurrency);

@@ -1,4 +1,4 @@
-package Models;
+package it.mloesch.BK_Challenge.Models;
 
 import lombok.Data;
 
