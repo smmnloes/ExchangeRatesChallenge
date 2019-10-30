@@ -2,8 +2,8 @@ package it.mloesch.BK_Challenge.RestControllers;
 
 import it.mloesch.BK_Challenge.Exceptions.ExchangeRatesAPIException;
 import it.mloesch.BK_Challenge.Exceptions.InvalidDateException;
-import it.mloesch.BK_Challenge.ExchangeRateAPIService;
 import it.mloesch.BK_Challenge.Models.ExchangeRateInfo;
+import it.mloesch.BK_Challenge.Services.ExchangeRateAPIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,9 @@
-package it.mloesch.BK_Challenge;
+package it.mloesch.BK_Challenge.Services;
 
 import it.mloesch.BK_Challenge.Exceptions.ExchangeRatesAPIException;
 import it.mloesch.BK_Challenge.Models.ExchangeRateInfo;
 import it.mloesch.BK_Challenge.Models.ExchangeRateInfoResponse;
 import it.mloesch.BK_Challenge.Models.Trend;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -21,12 +20,11 @@ import static it.mloesch.BK_Challenge.Definitions.URLs.EXCHANGE_RATES_API_HISTOR
 @Service
 public class ExchangeRateAPIServiceImpl implements ExchangeRateAPIService {
     @Override
-    @Nullable
     public ExchangeRateInfo getExchangeRateInfo(LocalDate date, String baseCurrency, String targetCurrency) throws ExchangeRatesAPIException {
         String uri = UriComponentsBuilder.fromUriString(EXCHANGE_RATES_API_HISTORY_URL)
                 .queryParam("base", baseCurrency)
                 .queryParam("symbols", targetCurrency)
-                .queryParam("start_at", date.minusDays(7).toString())
+                .queryParam("start_at", date.minusDays(6).toString())
                 .queryParam("end_at", date)
                 .build().toUriString();
 
@@ -74,7 +72,6 @@ public class ExchangeRateAPIServiceImpl implements ExchangeRateAPIService {
                 ascending = false;
                 descending = false;
             }
-
         }
 
         if (ascending) {

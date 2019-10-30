@@ -1,4 +1,4 @@
-package it.mloesch.BK_Challenge;
+package it.mloesch.BK_Challenge.Services;
 
 import it.mloesch.BK_Challenge.Exceptions.ExchangeRatesAPIException;
 import it.mloesch.BK_Challenge.Models.ExchangeRateInfo;
