@@ -26,7 +26,9 @@ public class ExchangeRateInfoHistoryServiceImpl implements ExchangeRateInfoHisto
 
     @Override
     public Collection<ExchangeRateInfoHistory> getByMonth(LocalDate date) {
-        return null;
+        LocalDate minDate = date.withDayOfMonth(1);
+        LocalDate maxDate = date.withDayOfMonth(date.lengthOfMonth());
+        return exchangeRateInfoHistoryRepository.getExchangeRateInfoHistoriesByDateBetween(minDate, maxDate);
     }
 
     @Override

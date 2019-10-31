@@ -1,6 +1,7 @@
 package it.mloesch.BK_Challenge.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.mloesch.BK_Challenge.Models.ExchangeRateInfo;
 import it.mloesch.BK_Challenge.Models.Trend;
 import lombok.Data;
@@ -15,6 +16,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Table(name = "exchange_rate_info_history")
 @Transactional
+@JsonIgnoreProperties(value = {
+        "exchangeRateInfoHistoryId"
+})
 public class ExchangeRateInfoHistory {
     @Id
     @GeneratedValue

@@ -17,8 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 
-import static it.mloesch.BK_Challenge.Definitions.URLs.INTERNAL_RATE_HISTORY_DAILY_URL;
-import static it.mloesch.BK_Challenge.Definitions.URLs.INTERNAL_RATE_INFO_URL;
+import static it.mloesch.BK_Challenge.Definitions.URLs.*;
 
 
 @RestController()
@@ -62,4 +61,12 @@ public class ExchangeRateController {
         Collection<ExchangeRateInfoHistory> exchangeRateInfoHistories = exchangeRateInfoHistoryService.getByDay(date);
         return new ResponseEntity<>(exchangeRateInfoHistories, HttpStatus.OK);
     }
+
+    @GetMapping(INTERNAL_RATE_HISTORY_MONTHLY_URL)
+    ResponseEntity<Collection<ExchangeRateInfoHistory>> getMonthlyExchangeInfo(@PathVariable String year, @PathVariable String month) {
+        LocalDate date = LocalDate.parse(year + "-" + month + "-" + "01");
+        Collection<ExchangeRateInfoHistory> exchangeRateInfoHistories = exchangeRateInfoHistoryService.getByMonth(date);
+        return new ResponseEntity<>(exchangeRateInfoHistories, HttpStatus.OK);
+    }
+
 }

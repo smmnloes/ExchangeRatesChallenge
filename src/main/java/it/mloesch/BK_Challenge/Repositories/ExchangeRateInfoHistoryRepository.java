@@ -7,5 +7,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 
 public interface ExchangeRateInfoHistoryRepository extends JpaRepository<ExchangeRateInfoHistory, Long> {
-    public Collection<ExchangeRateInfoHistory> getExchangeRateInfoHistoriesByDate(LocalDate date);
+    Collection<ExchangeRateInfoHistory> getExchangeRateInfoHistoriesByDate(LocalDate date);
+
+    Collection<ExchangeRateInfoHistory> getExchangeRateInfoHistoriesByDateBetween(LocalDate start, LocalDate end);
 }
