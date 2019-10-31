@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.OptionalDouble;
 
-import static it.mloesch.BK_Challenge.Definitions.URLs.EXCHANGE_RATES_API_HISTORY_URL;
+import static it.mloesch.BK_Challenge.Definitions.URLs.EXTERNAL_HISTORY_URL;
 
 @Service
 public class ExchangeRateAPIServiceImpl implements ExchangeRateAPIService {
     @Override
     public ExchangeRateInfo getExchangeRateInfo(LocalDate date, String baseCurrency, String targetCurrency) throws ExchangeRatesAPIException {
-        String uri = UriComponentsBuilder.fromUriString(EXCHANGE_RATES_API_HISTORY_URL)
+        String uri = UriComponentsBuilder.fromUriString(EXTERNAL_HISTORY_URL)
                 .queryParam("base", baseCurrency)
                 .queryParam("symbols", targetCurrency)
                 .queryParam("start_at", date.minusDays(6).toString())

@@ -1,14 +1,23 @@
 package it.mloesch.BK_Challenge.Definitions;
 
 public class URLs {
-    public static final String EXCHANGE_RATE_ROOT_URL = "/api/exchange-rate";
-    public static final String EXCHANGE_INFO_URL = EXCHANGE_RATE_ROOT_URL + "/{date}/{baseCurrency}/{targetCurrency}";
 
-    public static final String EXCHANGE_RATES_API_BASE_URL = "https://api.exchangeratesapi.io";
+    /**
+     * Internal API URLS
+     **/
+    public static final String INTERNAL_ROOT_URL = "/api/exchange-rate";
+    public static final String INTERNAL_RATE_INFO_URL = INTERNAL_ROOT_URL + "/{date}/{baseCurrency}/{targetCurrency}";
+    public static final String INTERNAL_RATE_HISTORY_ROOT_URL = INTERNAL_ROOT_URL + "/history";
+    public static final String INTERNAL_RATE_HISTORY_DAILY_URL = INTERNAL_RATE_HISTORY_ROOT_URL + "/daily/{year}/{month}/{day}";
+    public static final String INTERNAL_RATE_HISTORY_MONTHLY_URL = INTERNAL_RATE_HISTORY_ROOT_URL + "/monthly/{year}/{month}";
 
-    public static final String EXCHANGE_RATES_API_LATEST_URL = EXCHANGE_RATES_API_BASE_URL + "/latest";
-    public static final String EXCHANGE_RATES_API_HISTORY_URL = EXCHANGE_RATES_API_BASE_URL + "/history";
 
+
+    /**
+     * External API URLS
+     **/
+    public static final String EXTERNAL_BASE_URL = "https://api.exchangeratesapi.io";
+    public static final String EXTERNAL_HISTORY_URL = EXTERNAL_BASE_URL + "/history";
 
 
 }

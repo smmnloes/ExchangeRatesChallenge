@@ -35,6 +35,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> exception(Exception ex) {
+        ex.printStackTrace();
         CustomError customError = new CustomError(HttpStatus.INTERNAL_SERVER_ERROR.toString(), "InternalServerError",
                 "An internal error occured, please try again later.");
         return new ResponseEntity<>(new Errors(customError), HttpStatus.INTERNAL_SERVER_ERROR);
